@@ -15,6 +15,7 @@ pipeline {
 					-o './'
 					-s './'
 					-f 'ALL'
+					--suppression suppression.xml
 					--prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
 					
 				dependencyCheckPublisher pattern: 'dependency-check-report.xml'
