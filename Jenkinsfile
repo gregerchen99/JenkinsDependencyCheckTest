@@ -6,7 +6,6 @@ pipeline {
 				git 'https://github.com/gregerchen99/JenkinsDependencyCheckTest.git'
 			}
 		}
-
 		stage('OWASP Dependency-Check Vulnerabilities') {
 	      steps {
 	        dependencyCheck additionalArguments: ''' 
