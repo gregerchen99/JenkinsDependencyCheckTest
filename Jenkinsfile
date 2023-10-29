@@ -6,15 +6,19 @@ pipeline {
 				git 'https://github.com/gregerchen99/JenkinsDependencyCheckTest.git'
 			}
 		}
-		stage('OWASP Dependency-Check Vulnerabilities') {
-	      steps {
-	        dependencyCheck additionalArguments: ''' 
-	                    -o './'
-	                    -s './'
-	                    -f 'ALL' 
-	                    --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
-	        
-	        dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-	      }
-	    }
-}
+
+		stage('OWASP DependencyCheck') {
+			steps {
+				dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+				//dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+				dependencyCheck additionalArguments: '''
+					-o './'
+					-s './'
+					-f 'ALL'
+					--prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+					
+				dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+			}
+		}
+	}
+}	
